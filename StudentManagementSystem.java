@@ -84,13 +84,19 @@ class Student implements Serializable {
 
     // Method to print student details and courses/grades
     public void printStudent() {
+        int totalCredits = 0;
         System.out.println("Name: " + name + ", Age: " + age + ", Year: " + year);
         if (coursesGrades.isEmpty()) {
             System.out.println("No courses added.");
         } else {
             for (Map.Entry<String, Course> entry : coursesGrades.entrySet()) {
                 System.out.println("Course: " + entry.getKey() + ", Grade: " + entry.getValue().grade + ", Credits: " + entry.getValue().credits);
+                totalCredits += entry.getValue().credits;
             }
+        }
+        double gpa = calculateGPA();
+        if(gpa >= 3.4 && totalCredits >=12){
+            System.out.println("* Dean's List Honor");
         }
     }
 }
