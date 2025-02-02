@@ -103,6 +103,7 @@ class Student implements Serializable {
         if(gpa >= 3.4 && totalCredits >=12){
             System.out.println("* Dean's List Honor");
         }
+        System.out.println("\n");
     }
 }
 
