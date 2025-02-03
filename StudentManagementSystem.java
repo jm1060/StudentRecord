@@ -100,8 +100,24 @@ class Student implements Serializable {
             }
         }
         double gpa = calculateGPA();
+        boolean deanslist = false;
         if(gpa >= 3.4 && totalCredits >=12){
-            System.out.println("* Dean's List Honor");
+            for(Map.Entry<String, Course> e : coursesGrades.entrySet())
+            {
+                if(e.getValue().grade.equals("D") || e.getValue().grade.equals("F"))
+                {
+                    deanslist = false;
+                    break;
+                }
+                else
+                {
+                    deanslist = true;
+                }
+            }
+            if(deanslist)
+            {
+                System.out.println("* Dean's List");
+            }
         }
         System.out.println("\n");
     }
