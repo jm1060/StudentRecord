@@ -101,7 +101,11 @@ class Student implements Serializable {
         }
         double gpa = calculateGPA();
         boolean deanslist = false;
-        if(gpa >= 3.4 && totalCredits >=12){
+        if(gpa < 2.0)
+        {
+            System.out.println("* Academic Probation");
+        }
+        else if(gpa >= 3.4 && totalCredits >=12){
             for(Map.Entry<String, Course> e : coursesGrades.entrySet())
             {
                 if(e.getValue().grade.equals("D") || e.getValue().grade.equals("F"))
