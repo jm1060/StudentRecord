@@ -20,13 +20,15 @@ class Student implements Serializable {
     String name;
     int age;
     String year; // Academic year (Freshman, Sophomore, Junior, Senior)
+    String major;
     Map<String, Course> coursesGrades; // Map to store courses and their corresponding (grade, credits)
 
     // Constructor
-    public Student(String name, int age, String year) {
+    public Student(String name, int age, String year, String major) {
         this.name = name;
         this.age = age;
         this.year = year;
+        this.major = major;
         this.coursesGrades = new HashMap<>();
     }
 
@@ -90,7 +92,7 @@ class Student implements Serializable {
     // Method to print student details and courses/grades
     public void printStudent() {
         int totalCredits = 0;
-        System.out.println("Name: " + name + ", Age: " + age + ", Year: " + year);
+        System.out.println("Name: " + name + ", Age: " + age + ", Year: " + year + ", Major: "+ major);
         if (coursesGrades.isEmpty()) {
             System.out.println("No courses added.");
         } else {
@@ -158,8 +160,8 @@ public class StudentManagementSystem {
     }
 
     // Method to add a new student
-    public static void addStudent(String name, int age, String year) {
-        students.add(new Student(name, age, year));
+    public static void addStudent(String name, int age, String year, String major) {
+        students.add(new Student(name, age, year, major));
         System.out.println("Student added successfully.");
     }
 
@@ -240,7 +242,9 @@ public class StudentManagementSystem {
                     scanner.nextLine();
                     System.out.print("Enter student year (Freshman, Sophomore, Junior, Senior): ");
                     String year = scanner.nextLine();
-                    addStudent(name, age, year);
+                    System.out.println("Enter student's major:");
+                    String major = scanner.nextLine();
+                    addStudent(name, age, year, major);
                     break;
 
                 case 2:
