@@ -197,7 +197,7 @@ public class StudentManagementSystem {
     public static void calculateGPAForStudent(int studentIndex) {
         if (studentIndex >= 0 && studentIndex < students.size()) {
             double gpa = students.get(studentIndex).calculateGPA();
-            System.out.println("GPA for " + students.get(studentIndex).name + ": " + gpa);
+            System.out.format("GPA for " + students.get(studentIndex).name + ": " + "%.2f", gpa);
         } else {
             System.out.println("Student not found.");
         }
