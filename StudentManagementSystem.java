@@ -21,14 +21,16 @@ class Student implements Serializable {
     int age;
     String year; // Academic year (Freshman, Sophomore, Junior, Senior)
     String major;
+    String minor;
     Map<String, Course> coursesGrades; // Map to store courses and their corresponding (grade, credits)
 
     // Constructor
-    public Student(String name, int age, String year, String major) {
+    public Student(String name, int age, String year, String major, String minor) {
         this.name = name;
         this.age = age;
         this.year = year;
         this.major = major;
+        this.minor = minor;
         this.coursesGrades = new HashMap<>();
     }
 
@@ -92,7 +94,7 @@ class Student implements Serializable {
     // Method to print student details and courses/grades
     public void printStudent() {
         int totalCredits = 0;
-        System.out.println("Name: " + name + ", Age: " + age + ", Year: " + year + ", Major: "+ major);
+        System.out.println("Name: " + name + ", Age: " + age + ", Year: " + year + ", Major: "+ major + ", Minor: "+minor);
         if (coursesGrades.isEmpty()) {
             System.out.println("No courses added.");
         } else {
@@ -160,8 +162,8 @@ public class StudentManagementSystem {
     }
 
     // Method to add a new student
-    public static void addStudent(String name, int age, String year, String major) {
-        students.add(new Student(name, age, year, major));
+    public static void addStudent(String name, int age, String year, String major, String minor) {
+        students.add(new Student(name, age, year, major, minor));
         System.out.println("Student added successfully.");
     }
 
@@ -244,7 +246,9 @@ public class StudentManagementSystem {
                     String year = scanner.nextLine();
                     System.out.println("Enter student's major:");
                     String major = scanner.nextLine();
-                    addStudent(name, age, year, major);
+                    System.out.println("Enter student's minor");
+                    String minor = scanner.nextLine();
+                    addStudent(name, age, year, major, minor);
                     break;
 
                 case 2:
