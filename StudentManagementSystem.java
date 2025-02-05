@@ -105,7 +105,7 @@ class Student implements Serializable {
         }
         double gpa = calculateGPA();
         boolean deanslist = false;
-        if(gpa < 2.0)
+        if(gpa < 2.0 && totalCredits > 0)
         {
             System.out.println("* Academic Probation");
         }
