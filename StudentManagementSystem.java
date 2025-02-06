@@ -57,6 +57,12 @@ class Student implements Serializable {
             System.out.println("Course not found.");
         }
     }
+    // Method to edit student's major
+    public void editMajor(String newMajor) {
+        this.major = newMajor;
+        System.out.println("Major updated successfully to " + newMajor);
+    }
+
 
     // Method to calculate GPA
     public double calculateGPA() {
@@ -129,6 +135,7 @@ class Student implements Serializable {
         }
         System.out.println("\n");
     }
+    
 }
 
 // Main class to manage the student management system
@@ -215,6 +222,14 @@ public class StudentManagementSystem {
             }
         }
     }
+    // Method to edit a student's major
+    public static void editStudentMajor(int studentIndex, String newMajor) {
+        if (studentIndex >= 0 && studentIndex < students.size()) {
+            students.get(studentIndex).editMajor(newMajor);
+        } else {
+            System.out.println("Student not found.");
+        }
+}
 
     // Main method for the application
     public static void main(String[] args) {
@@ -229,8 +244,9 @@ public class StudentManagementSystem {
             System.out.println("3. Edit Student Course Grade and Credits");
             System.out.println("4. Remove Course from Student");
             System.out.println("5. Calculate GPA for Student");
-            System.out.println("6. Print All Students");
-            System.out.println("7. Exit");
+            System.out.println("6. Edit Student Major");
+            System.out.println("7. Print All Students");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -293,10 +309,21 @@ public class StudentManagementSystem {
                     break;
 
                 case 6:
-                    printAllStudents();
+                    System.out.print("Enter student index: ");
+                    studentIndex = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter new major: ");
+                    String newMajor = scanner.nextLine();
+                    editStudentMajor(studentIndex, newMajor);
                     break;
+                    
 
                 case 7:
+                    printAllStudents();
+                    break;
+                
+
+                case 8:
                     saveStudents();
                     System.out.println("Exiting...");
                     break;
@@ -304,7 +331,7 @@ public class StudentManagementSystem {
                 default:
                     System.out.println("Invalid choice! Try again.");
             }
-        } while (choice != 7);
+        } while (choice != 8);
 
         scanner.close();
     }
