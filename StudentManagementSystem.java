@@ -62,6 +62,10 @@ class Student implements Serializable {
         this.major = newMajor;
         System.out.println("Major updated successfully to " + newMajor);
     }
+    public void editMinor(String newMinor) {
+        this.minor = newMinor;
+        System.out.println("Minor updated successfully to "+ newMinor);
+    }
 
 
     // Method to calculate GPA
@@ -229,7 +233,14 @@ public class StudentManagementSystem {
         } else {
             System.out.println("Student not found.");
         }
-}
+    }
+    public static void editStudentMinor(int studentIndex, String newMinor){
+        if (studentIndex >= 0 && studentIndex < students.size()) {
+            students.get(studentIndex).editMinor(newMinor);
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
 
     // Main method for the application
     public static void main(String[] args) {
@@ -245,8 +256,9 @@ public class StudentManagementSystem {
             System.out.println("4. Remove Course from Student");
             System.out.println("5. Calculate GPA for Student");
             System.out.println("6. Edit Student Major");
-            System.out.println("7. Print All Students");
-            System.out.println("8. Exit");
+            System.out.println("7. Edit Student Minor");
+            System.out.println("8. Print All Students");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -316,14 +328,22 @@ public class StudentManagementSystem {
                     String newMajor = scanner.nextLine();
                     editStudentMajor(studentIndex, newMajor);
                     break;
-                    
 
                 case 7:
+                    System.out.print("Enter student index: ");
+                    studentIndex = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter new minor: ");
+                    String newMinor = scanner.nextLine();
+                    editStudentMinor(studentIndex, newMinor);
+                    break;
+
+                case 8:
                     printAllStudents();
                     break;
                 
 
-                case 8:
+                case 9:
                     saveStudents();
                     System.out.println("Exiting...");
                     break;
@@ -331,7 +351,7 @@ public class StudentManagementSystem {
                 default:
                     System.out.println("Invalid choice! Try again.");
             }
-        } while (choice != 8);
+        } while (choice != 9);
 
         scanner.close();
     }
