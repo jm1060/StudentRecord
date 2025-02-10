@@ -33,6 +33,17 @@ class Student implements Serializable {
         this.minor = minor;
         this.coursesGrades = new HashMap<>();
     }
+    // Method to edit student's year
+    public void editYear(String newYear) {
+        this.year = newYear;
+        System.out.println("Year updated successfully to " + newYear);
+    }
+
+    // Method to edit student's age
+    public void editAge(int newAge) {
+        this.age = newAge;
+        System.out.println("Age updated successfully to " + newAge);
+    }
 
     // Method to add a course with grade and credits
     public void addCourse(String courseName, String grade, int credits) {
@@ -161,6 +172,23 @@ public class StudentManagementSystem {
             System.out.println("Error loading data. Starting fresh.");
         }
     }
+    // Method to edit a student's year
+    public static void editStudentYear(int studentIndex, String newYear) {
+        if (studentIndex >= 0 && studentIndex < students.size()) {
+            students.get(studentIndex).editYear(newYear);
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    // Method to edit a student's age
+    public static void editStudentAge(int studentIndex, int newAge) {
+        if (studentIndex >= 0 && studentIndex < students.size()) {
+            students.get(studentIndex).editAge(newAge);
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
 
     // Method to save students to file
     private static void saveStudents() {
@@ -257,8 +285,10 @@ public class StudentManagementSystem {
             System.out.println("5. Calculate GPA for Student");
             System.out.println("6. Edit Student Major");
             System.out.println("7. Edit Student Minor");
-            System.out.println("8. Print All Students");
-            System.out.println("9. Exit");
+            System.out.println("8. Edit Student Year");
+            System.out.println("9. Edit Student Age");
+            System.out.println("10. Print All Students");
+            System.out.println("11. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -338,12 +368,29 @@ public class StudentManagementSystem {
                     editStudentMinor(studentIndex, newMinor);
                     break;
 
-                case 8:
-                    printAllStudents();
+                case 8: 
+                    System.out.println("Enter student index: ");
+                    studentIndex = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter new year: ");
+                    String newyear = scanner.nextLine();
+                    editStudentYear(studentIndex, newyear);
                     break;
                 
+                case 9: 
+                    System.out.println("Enter student index: ");
+                    studentIndex = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter new age: ");
+                    int newAge = scanner.nextInt();
+                    editStudentAge(studentIndex, newAge);
+                    break;
 
-                case 9:
+                case 10:
+                    printAllStudents();
+                    break;
+
+                case 11:
                     saveStudents();
                     System.out.println("Exiting...");
                     break;
@@ -351,7 +398,7 @@ public class StudentManagementSystem {
                 default:
                     System.out.println("Invalid choice! Try again.");
             }
-        } while (choice != 9);
+        } while (choice != 11);
 
         scanner.close();
     }
