@@ -47,7 +47,13 @@ class Student implements Serializable {
 
     // Method to add a course with grade and credits
     public void addCourse(String courseName, String grade, int credits) {
-        coursesGrades.put(courseName, new Course(grade, credits));
+        int totalCredits = coursesGrades.values().stream().mapToInt(c -> c.credits).sum();
+        if (totalCredits + credits > 18) {
+            System.out.println("Cannot add " + courseName + ". Exceeds 18-credit limit.");
+        } else {
+            coursesGrades.put(courseName, new Course(grade, credits));
+            System.out.println("Course " + courseName + " added.");
+        }
     }
 
     // Method to edit a course grade and credits
@@ -210,7 +216,7 @@ public class StudentManagementSystem {
     public static void addCourseToStudent(int studentIndex, String courseName, String grade, int credits) {
         if (studentIndex >= 0 && studentIndex < students.size()) {
             students.get(studentIndex).addCourse(courseName, grade, credits);
-            System.out.println("Course and grade added successfully.");
+            
         } else {
             System.out.println("Student not found.");
         }
